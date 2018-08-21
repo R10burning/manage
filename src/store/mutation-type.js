@@ -1,2 +1,2 @@
-export const CHANGE_COUNT = 'SET_NAME'
-export const COLLAPSE_MENU = 'SET_AGE'
+export const CHANGE_COUNT = 'CHANGE_COUNT'
+export const COLLAPSE_MENU = 'COLLAPSE_MENU'

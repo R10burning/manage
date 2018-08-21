@@ -2,7 +2,7 @@
 <template>
   <div>
     <div>{{this.addCount}}</div>
-    <a href="#">123</a>
+    <a href="#" @click="changeCount(123)">123</a>
   </div>
 </template>
 
@@ -26,16 +26,12 @@ export default {
   },
 
   mounted () {
-  }
+  },
 
-  // methods: {
-  //   // show () {
-  //   //   console.log(this.$route.query.id)
-  //   // },
-  //   // add () {
-  //   //   this.$store.commit('increment')
-  //   // }
-  // }
+  methods: {
+    ...mapMutations(['CHANGE_COUNT']),
+    ...mapActions(['changeCount'])
+  }
 }
 
 </script>

@@ -1,6 +1,6 @@
 <template>
   <div style="display:flex;flexDirection:row;alignItems:center;">
-    <i class="el-icon-menu toggle" @click="toggele"></i>
+    <i class="el-icon-menu toggle" @click="changeMenu"></i>
     <el-menu :default-active="activeIndex" class="el-menu-demo" mode="horizontal" @select="handleSelect">
       <el-menu-item index="1">处理中心</el-menu-item>
       <el-submenu index="2">
@@ -24,6 +24,8 @@
 </template>
 
 <script>
+import {mapGetters, mapMutations, mapActions, mapState} from 'vuex'
+
 export default {
   data () {
     return {
@@ -36,11 +38,9 @@ export default {
   // mounted: {},
 
   methods: {
+    ...mapActions(['changeMenu']),
     handleSelect (key, keyPath) {
       console.log(key, keyPath)
-    },
-    toggele () {
-      this.$store.commit('toggleMenu')
     }
   }
 }
