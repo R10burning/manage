@@ -1,10 +1,9 @@
 <template>
   <div>
-    <el-radio-group v-model="isCollapse">
-      <el-radio-button :label="false" size="small">展开</el-radio-button>
-      <el-radio-button :label="true">收起</el-radio-button>
-    </el-radio-group>
-    <el-menu default-active="1-4-1" class="el-menu-vertical" @open="handleOpen" @close="handleClose" :collapse="isCollapse">
+    <el-menu default-active="1-4-1" class="el-menu-vertical" @open="handleOpen" @close="handleClose"
+    :collapse="showAll" background-color="#409EFF" text-color="#D8DFE6"
+    active-text-color="#fff"
+    >
       <el-submenu index="1">
         <template slot="title">
           <i class="el-icon-location"></i>
@@ -13,7 +12,7 @@
         <el-menu-item-group>
           <span slot="title">分组一</span>
           <el-menu-item index="1-1">
-            <router-link :to="'/test/驱蚊器翁群'">wocaoa</router-link>
+            <router-link :to="{path:'/test',query:{id:'fsdfsdfsfs'}}">wocaoa</router-link>
           </el-menu-item>
           <el-menu-item index="1-2">选项2</el-menu-item>
         </el-menu-item-group>
@@ -42,12 +41,16 @@
 </template>
 
 <script>
+import { mapState } from 'vuex'
 export default {
   data () {
     return {
       isCollapse: false
     }
   },
+  computed: mapState({
+    showAll: store => store.showAll
+  }),
   methods: {
     handleOpen (key, keyPath) {
       console.log(key, keyPath)
@@ -66,5 +69,8 @@ export default {
 .el-menu-vertical:not(.el-menu--collapse) {
   width: 200px;
   min-height: 400px;
+}
+.el-menu-item i,.el-submenu__title i,.el-menu-item-group__title{
+ color: #D8DFE6;
 }
 </style>

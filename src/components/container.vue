@@ -5,6 +5,9 @@
         <left-menu/>
       </div>
       <div class="right">
+        <div>
+          <right-menu/>
+        </div>
         <keep-alive>
           <router-view></router-view>
         </keep-alive>
@@ -15,9 +18,11 @@
 <script>
 import '../static/css/reset.css'
 import leftMenu from './leftMenu'
+import RightMenu from './horizontalMenu'
 export default {
   components: {
-    leftMenu
+    leftMenu,
+    RightMenu
   }
 }
 </script>
@@ -29,6 +34,7 @@ export default {
     display: flex;
     .left{
       max-width: 200px;
+      background-color: #409EFF;
     }
     .right{
       flex: 1;

@@ -1,22 +1,42 @@
 <!--  -->
 <template>
-  <div>{{this.$route.params.number}}</div>
+  <div>
+    <div>{{this.count}}</div>
+    <a href="#">123</a>
+  </div>
 </template>
 
 <script>
+import {mapGetters, mapMutations, mapActions, mapState} from 'vuex'
+
 export default {
   data () {
     return {
+      totla: 0
     }
   },
 
   components: {},
 
-  computed: {},
+  computed: {
+    ...mapState({
+      count: state => state.count
+    }),
+    ...mapGetters(['addCount'])
+  },
 
-  mounted: {},
+  mounted () {
+    console.log(this.$store.getters.addCount)
+  }
 
-  methods: {}
+  // methods: {
+  //   // show () {
+  //   //   console.log(this.$route.query.id)
+  //   // },
+  //   // add () {
+  //   //   this.$store.commit('increment')
+  //   // }
+  // }
 }
 
 </script>
