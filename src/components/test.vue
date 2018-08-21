@@ -1,7 +1,7 @@
 <!--  -->
 <template>
   <div>
-    <div>{{this.count}}</div>
+    <div>{{this.addCount}}</div>
     <a href="#">123</a>
   </div>
 </template>
@@ -26,7 +26,6 @@ export default {
   },
 
   mounted () {
-    console.log(this.$store.getters.addCount)
   }
 
   // methods: {
