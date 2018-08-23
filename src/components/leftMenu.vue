@@ -12,7 +12,7 @@
         <el-menu-item-group>
           <span slot="title">分组一</span>
           <el-menu-item index="1-1">
-            <router-link :to="{path:'/test',query:{id:'fsdfsdfsfs'}}">wocaoa</router-link>
+            <router-link :to="{path:'/test',query:{id:'fsdfsdfsfs'}}" tag="span">wocaoa</router-link>
           </el-menu-item>
           <el-menu-item index="1-2">选项2</el-menu-item>
         </el-menu-item-group>

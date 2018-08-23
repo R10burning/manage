@@ -3,11 +3,13 @@
   <div>
     <div>{{this.addCount}}</div>
     <a href="#" @click="changeCount(123)">123</a>
+    <div>{{count}}</div>
   </div>
 </template>
 
 <script>
 import {mapGetters, mapMutations, mapActions, mapState} from 'vuex'
+import request from '../../api'
 
 export default {
   data () {
@@ -19,13 +21,12 @@ export default {
   components: {},
 
   computed: {
-    ...mapState({
-      count: state => state.count
-    }),
+    ...mapState(['count']),
     ...mapGetters(['addCount'])
   },
 
   mounted () {
+    request('Get', '/api')
   },
 
   methods: {

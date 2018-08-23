@@ -5,6 +5,7 @@ import test from '../components/test'
 Vue.use(Router)
 
 export default new Router({
+  linkActiveClass: 'currentTab',
   mode: 'history',
   routes: [{
     path: '/test',
