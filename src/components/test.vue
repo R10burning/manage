@@ -26,7 +26,7 @@ export default {
   },
 
   mounted () {
-    request('Get', '/api')
+    request('Get', 'api/102093.json')
   },
 
   methods: {

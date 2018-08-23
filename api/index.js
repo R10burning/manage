@@ -1,14 +1,16 @@
 import axios from 'axios'
 
-export default async (method = 'post', url = '', data = {}, timeout = 1000 * 20) => {
+axios.defaults.timeout = 20000
+
+export default async (method = 'post', url = '', data = {}) => {
   try {
     let res = await axios({
       method,
       url,
       data,
-      timeout
+      headers: {'Content-Type': 'application/json'}
     })
-    console.log(res)
+    console.log(res.data)
   } catch (err) {
     console.log(err)
   }
