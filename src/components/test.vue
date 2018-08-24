@@ -9,7 +9,6 @@
 
 <script>
 import {mapGetters, mapMutations, mapActions, mapState} from 'vuex'
-import request from '../../api'
 
 export default {
   data () {
@@ -26,7 +25,7 @@ export default {
   },
 
   mounted () {
-    request('Get', 'api/102093.json')
+    this.$request.request('Get', this.$request.apis.test)
   },
 
   methods: {
