@@ -6,5 +6,8 @@ export default {
   },
   [types.COLLAPSE_MENU] (state) {
     state.showAll = !state.showAll
+  },
+  [types.GET_DATA] (state, res) {
+    state.data = res
   }
 }

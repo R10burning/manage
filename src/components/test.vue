@@ -20,17 +20,17 @@ export default {
   components: {},
 
   computed: {
-    ...mapState(['count']),
+    ...mapState(['count', 'apis', 'types']),
     ...mapGetters(['addCount'])
   },
 
   mounted () {
-    this.$request.request('Get', this.$request.apis.test)
+    // this.getData({method: 'GET', url: this.apis.test})
   },
 
   methods: {
-    ...mapMutations(['CHANGE_COUNT']),
-    ...mapActions(['changeCount'])
+    // ...mapMutations(['CHANGE_COUNT']),
+    ...mapActions(['changeCount', 'getData'])
   }
 }
 

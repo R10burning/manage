@@ -1,11 +1,10 @@
 import axios from 'axios'
-import apis from './apis'
 
 axios.defaults.timeout = 20000
 
 const baseUrl = 'http://localhost:9498/'
 
-let request = async (method = 'post', url = '', data = {}) => {
+export default async (method, url, data) => {
   try {
     let requestUrl
     !url.includes('http') ? requestUrl = baseUrl + url : requestUrl = url
@@ -17,13 +16,8 @@ let request = async (method = 'post', url = '', data = {}) => {
         'Content-Type': 'application/json'
       }
     })
-    console.log(res.data)
+    return res.data
   } catch (err) {
     console.log(err)
   }
-}
-
-export default {
-  request,
-  apis
 }

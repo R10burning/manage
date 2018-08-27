@@ -45,11 +45,13 @@ import { mapState } from 'vuex'
 export default {
   data () {
     return {
-      isCollapse: false
+      isCollapse: false,
+      menuData: null
     }
   },
   computed: mapState({
-    showAll: store => store.showAll
+    showAll: store => store.showAll,
+    apis: store => store.apis
   }),
   methods: {
     handleOpen (key, keyPath) {
@@ -60,7 +62,13 @@ export default {
     },
     test () {
       console.log(123)
+    },
+    async _getData () {
+      this.menuData = await this.$store.dispatch('getData', {method: 'GET', url: this.apis.menu})
     }
+  },
+  mounted () {
+    this._getData()
   }
 }
 </script>
