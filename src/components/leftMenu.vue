@@ -1,20 +1,19 @@
 <template>
   <div>
-    <el-menu default-active="1-4-1" class="el-menu-vertical" @open="handleOpen" @close="handleClose"
-    :collapse="showAll" background-color="#409EFF" text-color="#D8DFE6"
+    <el-menu default-active="3" class="el-menu-vertical" @open="handleOpen" @close="handleClose"
+    :collapse="showAll" background-color="#409EFF" text-color="#D8DFE6" :unique-opened="true" :router="true"
     active-text-color="#fff"
     >
-      <el-submenu :key="index" :index="`'${index}'`" v-for="(item, index) in menuData" v-if="item.parent_id===0 && item.node">
+      <!-- <el-submenu :key="index" :index="`'${index}'`" v-for="(item, index) in menuData" v-if="item.parent_id===0 && item.node">
         <template slot="title">
           <i class="el-icon-location"></i>
           <span slot="title">{{item.menu_name}}</span>
         </template>
-        <!-- <el-menu-item-group>
-          <span slot="title">分组一</span>
-          <el-menu-item index="1-1">
-            <router-link :to="{path:'/test',query:{id:'fsdfsdfsfs'}}" tag="span">wocaoa</router-link>
+        <el-menu-item-group v-for="(son, index_1) in item.node" v-if="!son.node && item.node" :key='index_1+"-1"' >
+          <span slot="title">{{`分组${index_1+1}`}}</span>
+          <el-menu-item :index="`'${index_1}'-1`">
+            <router-link :to="{path:'/test',query:{id:'fsdfsdfsfs'}}" tag="span">{{son.menu_name}}</router-link>
           </el-menu-item>
-          <el-menu-item index="1-2">选项2</el-menu-item>
         </el-menu-item-group>
         <el-menu-item-group title="分组2">
           <el-menu-item index="1-3">选项3</el-menu-item>
@@ -22,11 +21,11 @@
         <el-submenu index="1-4">
           <span slot="title">选项4</span>
           <el-menu-item index="1-4-1" @click="test">选项1</el-menu-item>
-        </el-submenu> -->
+        </el-submenu>
       </el-submenu>
-      <!-- <el-menu-item index="2">
+      <el-menu-item :index="`'${index}'`" v-for="(son, index) in menuData" :key="index" v-if="!son.node && son.parent_id === 0">
         <i class="el-icon-menu"></i>
-        <span slot="title">导航二</span>
+        <span slot="title">{{son.menu_name}}</span>
       </el-menu-item>
       <el-menu-item index="3" disabled>
         <i class="el-icon-document"></i>
@@ -35,41 +34,53 @@
       <el-menu-item index="4">
         <i class="el-icon-setting"></i>
         <span slot="title">导航四</span>
-      </el-menu-item> -->
+      </el-menu-item>-->
+      <template v-for="(value) in menuData">
+            <el-submenu :index="`${value.id}`" v-if="value.node" :key="value.id">
+                <template slot="title">
+                    <i class="el-icon-message"></i>
+                    <span slot="title">{{value.menu_name}}</span>
+                </template>
+                <leftMenu :menuData="value.node"></leftMenu>
+            </el-submenu>
+            <el-menu-item :index="`${value.id}`" v-else :key="value.id">
+                <i class="el-icon-document"></i>
+                <span slot="title">{{value.menu_name}}</span>
+            </el-menu-item>
+        </template>
     </el-menu>
   </div>
 </template>
 
 <script>
 import { mapState } from 'vuex'
+
 export default {
-  data () {
-    return {
-      isCollapse: false,
-      menuData: null
+  props: {
+    menuData: {
+      type: Array,
+      required: true
     }
   },
-  computed: mapState({
-    showAll: store => store.showAll,
-    apis: store => store.apis
-  }),
+  name: 'leftMenu',
+  data () {
+    return {
+      isCollapse: false
+    }
+  },
+  computed: {
+    ...mapState(['showAll'])
+  },
   methods: {
     handleOpen (key, keyPath) {
       console.log(key, keyPath)
     },
     handleClose (key, keyPath) {
       console.log(key, keyPath)
-    },
-    test () {
-      console.log(123)
-    },
-    async _getData () {
-      this.menuData = await this.$store.dispatch('getData', {method: 'GET', url: this.apis.menu})
-      console.log(this.menuData)
     }
   },
-  mounted () {
-    this._getData()
+  created () {
+    console.log(this.menuData)
   }
 }
 </script>
@@ -77,9 +88,16 @@ export default {
 <style lang="less">
 .el-menu-vertical:not(.el-menu--collapse) {
   width: 200px;
-  min-height: 400px;
 }
-.el-menu-item i,.el-submenu__title i,.el-menu-item-group__title{
+.el-submenu.is-opened li{
+ background-color:rgba(0, 0, 0, .2) !important;
+  &{
+    div{
+ background-color:rgba(0, 0, 0, .2) !important;
+    }
+  }
+}
+.el-menu-item i,.el-submenu__title i{
  color: #D8DFE6;
 }
 </style>

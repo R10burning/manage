@@ -2,7 +2,7 @@
   <div id="app">
     <div class="wrap">
       <div class="left">
-        <left-menu/>
+        <menu-bar/>
       </div>
       <div class="right">
         <div>
@@ -17,11 +17,11 @@
 </template>
 <script>
 import '../static/css/reset.css'
-import leftMenu from './leftMenu'
+import menuBar from './menuBar'
 import RightMenu from './horizontalMenu'
 export default {
   components: {
-    leftMenu,
+    menuBar,
     RightMenu
   }
 }
